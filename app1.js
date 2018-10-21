@@ -1,11 +1,31 @@
 var express = require('express');
 var app = express();
 
+// Adding the body-parser 
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({ extended: false });
+
+
 var blocks = {
   'Fixed': 'Fastened securely in position',
    'Movable': 'Capable of being moved',
    'Rotating': 'Moving in a cirlce around its center'
 };
+
+// Deletes a block from the form tag
+app.delete('/blocks/:name', function(request, responce){
+    delete blocks[request.blockName];
+    responce.sendStatus(200);// Sending the status code of 200 sends the status responce as OK
+});
+
+
+// To make a block name and submit the block name using or connecting from the form tag
+app.post('/blocks', parseUrlencoded /* this will run first */, /* this will run second */function(request, responce) {
+     var newBlock = request.body;
+     blocks[newBlock.name] = newBlock.description;
+     
+     responce.status(201).json(newBlock.name) // sets the 201 Created status code , and sets a new block name
+})
 
 var locations = {
  'Fixed': 'First floor', 'Movable': 'Second floor', 'Rotating': 'Penthouse'   

@@ -26,3 +26,9 @@ There are 3 sections it passes before reaching the route, the 3 are Validation, 
 The first middle ware 'middleware A' is a function that takes the request and responce of the function as an arguement and then uses the next function to move from MiddleWare A to MiddleWare B, Like a pattern
 
 */
+
+/*
+
+Using multiple route handlers is useful for re-using middleware that load resources, perform validations, authentication, etc.
+
+*/
